@@ -1,0 +1,14 @@
+body{
+	background-image: url(images/background.jpg);
+	background-repeat: no-repeat;
+	background-position : center;
+	background-size: cover;
+	background-attachment: fixed;
+	color: aliceblue;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+i{
+	color: aliceblue;
+	font-size: 40px;
+}

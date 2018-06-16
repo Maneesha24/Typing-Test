@@ -4,6 +4,13 @@ var addEventListeners = function(){
 }
 return{
 	init:function(duration,textNumber){
+		dataModule.fillListOfTestWords(textNumber);
+		
+		
+		
+		
+		
+		
 		addEventListeners();
 	}
 };

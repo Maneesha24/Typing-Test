@@ -8,7 +8,7 @@ body {
 	font-family: 'Noto Sans', sans-serif;
 }
 
-header>h1{
+header > h1 {
 	padding: 2rem;
 	color: darkgray;
 }
@@ -48,8 +48,8 @@ i {
 }
 
 
-#input{
-	background-color: rgba(49, 216, 189,0.5);
+#input {
+	background-color: rgba(49, 216, 189, 0.5);
 	width: 100%;
 	font-size: 30px;
 	padding: 10px;
@@ -57,7 +57,7 @@ i {
 }
 
 
-.keyboard{
+.keyboard {
 	min-height: 250px;
 	max-height: 300px;
 	background-image: url('images/keyb.png');
@@ -67,42 +67,44 @@ i {
 	margin-top: 10px;
 }
 
-.restart{
+.restart {
 	margin-top: 20px;
 	opacity: 0.5;
 }
 
-.btn-primary{
-		background-color: rgba(49, 216, 189,0.3);
+.btn-primary {
+	background-color: rgba(49, 216, 189, 0.3);
 
 }
 
 
-.btn-primary:focus,.btn-primary:hover,.btn-primary:active{
-		background-color: rgb(49, 216, 189);
-		cursor: pointer;
-	
+.btn-primary:focus,
+.btn-primary:hover,
+.btn-primary:active {
+	background-color: rgb(49, 216, 189);
+	cursor: pointer;
+
 
 }
 
-.scoreDown,.scoreUp{
+.scoreDown,
+.scoreUp {
 	border-radius: 5px;
 	padding: 5px;
-	font-size:12px;
+	font-size: 12px;
 }
 
 
-.scoreDown{
+.scoreDown {
 	background-color: mediumspringgreen;
 }
 
-.scoreUp{
+.scoreUp {
 	background-color: mediumvioletred;
 	color: black;
 }
 
 
-.modal{
+.modal {
 	color: black;
 }
-

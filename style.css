@@ -108,3 +108,9 @@ i {
 .modal {
 	color: black;
 }
+
+
+.activeWord{
+	background-color: darkgray;
+	border-radius: 5px;
+}

@@ -15,6 +15,13 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 			var timeLeft = dataModule.getTimeLeft();
 			UIModule.updateTimeLeft(timeLeft);
 			dataModule.moveToNewWord();
+			var index = dataModule.getCurrentWordIndex();
+			UIModule.setActiveWord(index);
+			var currentWord = dataModule.getCurrentWord();
+			UIModule.formatWord(currentWord);
+			
+			UIModule.inputFocus();
+			
 			
 			addEventListeners();
 		}

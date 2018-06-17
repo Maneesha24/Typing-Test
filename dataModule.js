@@ -119,6 +119,20 @@ var dataModule = (function () {
 			var newWord = new word(currentIndex);
 			appData.words.currentWord = newWord;
 		},
+		
+		getCurrentWordIndex(){
+			return appData.words.currentWordIndex;
+		},
+		
+		getCurrentWord(){
+			var currentWord = appData.words.currentWord;
+			return {
+				value : {
+					correct : currentWord.value.correct,
+					user: currentWord.value.user
+				}
+			};
+		},
 
 		getListOfTestWords: function () {
 			return appData.words.testWords;

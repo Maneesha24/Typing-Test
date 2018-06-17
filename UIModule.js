@@ -39,6 +39,11 @@ var UIModule = (function () {
 		return array.join('');
 	}
 	return {
+		inputFocus: function () {
+			DOMElements.textInput.focus();
+		},
+
+
 		fillContent: function (array, lineReturn) {
 
 			var content = array.map(splitArray);
@@ -52,8 +57,21 @@ var UIModule = (function () {
 
 		},
 
-		updateTimeLeft: function (x) {
-DOMElements.timeLeft.innerHTML = x;
+		formatWord: function (wordObject) {
+			var activeWord = DOMElements.activeWord;
+			activeWord.className = 'activeWord';
+
+
 		},
+
+		updateTimeLeft: function (x) {
+			DOMElements.timeLeft.innerHTML = x;
+		},
+
+		setActiveWord: function (index) {
+
+			DOMElements.activeWord = DOMElements.content.children[index];
+
+		}
 	}
 })()

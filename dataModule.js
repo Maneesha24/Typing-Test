@@ -75,9 +75,9 @@ var dataModule = (function () {
 			var result = words.split(" ");
 
 			if (textNumber == 0) {
-				result = shuffle(result);
-				result = capitalizeRandom(result);
-				result = addRandomPunctuation(result);
+				//result = shuffle(result);
+				//result = capitalizeRandom(result);
+				//result = addRandomPunctuation(result);
 
 			}
 			appData.words.testWords = result;

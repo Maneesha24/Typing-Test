@@ -33,7 +33,7 @@ i {
 
 #content {
 	height: 120px;
-	background-color: #31d8bd;
+	background-color: rgba(49, 216, 189, 0.6);
 	margin-top: 30px;
 	margin-bottom: 15px;
 	font-size: 30px;
@@ -49,7 +49,7 @@ i {
 
 
 #input {
-	background-color: rgba(49, 216, 189, 0.5);
+	background-color: #31d8bd;
 	width: 100%;
 	font-size: 30px;
 	padding: 10px;

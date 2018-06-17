@@ -9,6 +9,13 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 			var lineReturn = dataModule.getLineReturn();
 			var testWords = dataModule.getListOfTestWords();
 			UIModule.fillContent(testWords, lineReturn);
+			dataModule.setTestTime(duration);
+			
+			dataModule.initializeTimeLeft();
+			var timeLeft = dataModule.getTimeLeft();
+			UIModule.updateTimeLeft(timeLeft);
+			dataModule.moveToNewWord();
+			
 			addEventListeners();
 		}
 	};

@@ -1,18 +1,18 @@
 var UIModule = (function () {
-	
+
 	var DOMElements = {
-		timeLeft : '',
-		wpm: '',
-		wpmChange: '',
-		cpm : '',
-		cpmChange: '',
-		accuracy: '',
-		accuracyChange: '',
-		textInput: '',
-		nameInput: '',
+		timeLeft: document.getElementById('timeLeft'),
+		wpm: document.getElementById('wpm'),
+		wpmChange: document.getElementById('wpmChange'),
+		cpm: document.getElementById('cpm'),
+		cpmChange: document.getElementById('cpmChange'),
+		accuracy: document.getElementById('accuracy'),
+		accuracyChange: document.getElementById('accuracyChange'),
+		textInput: document.querySelector('#input'),
+		nameInput: document.querySelector('.form-group'),
 		content: document.getElementById('content'),
-		activeWord : '',
-		modal: ''
+		activeWord: '',
+		modal: $('#myModal')
 	};
 
 	var splitArray = function (string) {
@@ -34,8 +34,8 @@ var UIModule = (function () {
 		array.unshift('<span>');
 		return array;
 	};
-	
-	var joinEachWord = function(array){
+
+	var joinEachWord = function (array) {
 		return array.join('');
 	}
 	return {
@@ -47,9 +47,13 @@ var UIModule = (function () {
 			content = content.map(addWordSpanTag);
 			content = content.map(joinEachWord);
 			content = content.join('');
-			content = content.split('<span>' + lineReturn +'</span>').join('<span>&crarr;</span>');
+			content = content.split('<span>' + lineReturn + '</span>').join('<span>&crarr;</span>');
 			DOMElements.content.innerHTML = content;
 
+		},
+
+		updateTimeLeft: function (x) {
+DOMElements.timeLeft.innerHTML = x;
 		},
 	}
 })()

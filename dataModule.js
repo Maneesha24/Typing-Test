@@ -60,27 +60,64 @@ var dataModule = (function () {
 			numOfTestCharacters: 0
 		},
 		words: {
-			currentWordIndex: 0,
+			currentWordIndex: -1,
 			testWords: [],
 			currentWord: {}
 		},
 	};
 
-	var word = function (index) {};
+	var word = function (index) {
+		this.value = {
+		correct : appData.words.testWords[index] + ' ',
+			user: '',
+			isCorrect : false
+		};
+		this.characters = {
+		correct : this.value.correct.split(''),
+			user: [],
+			totalCorrect : 0,
+			totalTest: this.value.correct.length
+		};
+		
+	};
 	word.prototype.update = function (value) {};
 
 
 	return {
+
+		setTestTime: function (x) {
+			appData.indicators.totalTestTime = x;
+		},
+
+
+		initializeTimeLeft: function (x) {
+
+			appData.indicators.timeLeft = appData.indicators.totalTestTime;
+		},
+
+		getTimeLeft: function () {
+			return appData.indicators.timeLeft;
+		},
 		fillListOfTestWords: function (textNumber, words) {
 			var result = words.split(" ");
 
-			if (textNumber == 0) {
-				//result = shuffle(result);
-				//result = capitalizeRandom(result);
-				//result = addRandomPunctuation(result);
+			//if (textNumber == 0) {
+			//result = shuffle(result);
+			//result = capitalizeRandom(result);
+			//result = addRandomPunctuation(result);
 
-			}
+			//}
 			appData.words.testWords = result;
+		},
+		
+		moveToNewWord : function(){
+			if(appData.words.currentWordIndex> -1){
+			   
+			   }
+			appData.words.currentWordIndex++;
+			var currentIndex = appData.words.currentWordIndex;
+			var newWord = new word(currentIndex);
+			appData.words.currentWord = newWord;
 		},
 
 		getListOfTestWords: function () {

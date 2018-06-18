@@ -1,22 +1,33 @@
 var eventsModule = (function (dataModule, UIModule, certificationModule, wordsModule) {
 	var addEventListeners = function () {
 		UIModule.getDOMElements().textInput.addEventListener('input', function (event) {
-			if(dataModule.testEnded()){
-				return ;
+			if (dataModule.testEnded()) {
+				return;
 			}
-			
-			if(!dataModule.testStarted()){
-				
+
+			if (!dataModule.testStarted()) {
+
 			}
-			
+
 			var typedWord = UIModule.getTypedWord();
-			
+
 			dataModule.updateCurrentWord(typedWord);
-			
+
 			var currentWord = dataModule.getCurrentWord();
 			UIModule.formatWord(currentWord);
 
-			if (UIModule.spacePressed() || UIModule.enterPressed()) {
+			if (UIModule.spacePressed(event) || UIModule.enterPressed()) {
+				UIModule.emptyInput();
+				UIModule.deactivateCurrentWord();
+				dataModule.moveToNewWord();
+
+				var index = dataModule.getCurrentWordIndex();
+				UIModule.setActiveWord(index);
+
+				var currentWord = dataModule.getCurrentWord();
+				UIModule.formatWord(currentWord);
+				
+				UIModule.scroll();
 
 			}
 		});

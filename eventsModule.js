@@ -20,11 +20,20 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 			if (!dataModule.testStarted()) {
 				var b = setInterval(function () {
 
+					var results = {};
+					[results.wpm, results.wpmChange] = dataModule.calculateWpm();
+
+					[results.cpm, results.cpmChange] = dataModule.calculateCpm();
+
 					
-					
-					
-					
-					
+					if (dataModule.timeLeft()) {
+
+						var timeLeft = dataModule.reduceTime();
+
+						UIModule.updateTimeLeft(timeLeft);
+					}
+
+
 				}, 1000);
 			}
 

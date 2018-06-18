@@ -120,6 +120,42 @@ var dataModule = (function () {
 		getTimeLeft: function () {
 			return appData.indicators.timeLeft;
 		},
+
+		calculateWpm: function () {
+			var wpmOld = appData.results.wpm;
+			var numOfCorrectWords = appData.results.numOfCorrectWords;
+			if (appData.indicators.timeLeft != appData.indicators.totalTestTime) {
+				appData.results.wpm = Math.round(60 * numOfCorrectWords / (appData.indicators.totalTestTime - appData.indicators.timeLeft));
+
+
+			} else {
+				appData.results.wpm = 0;
+			}
+
+			appData.results.wpmChange = appData.results.wpm - wpmOld;
+
+			return [appData.results.wpm, appData.results.wpmChange];
+		},
+
+		calculateCpm: function () {
+
+			var cpmOld = appData.results.cpm;
+			var numOfCorrectCharacters = appData.results.numOfCorrectCharacters;
+			if (appData.indicators.timeLeft != appData.indicators.totalTestTime) {
+				appData.results.cpm = Math.round(60 * numOfCorrectCharacters / (appData.indicators.totalTestTime - appData.indicators.timeLeft));
+
+
+			} else {
+				appData.results.cpm = 0;
+			}
+
+			appData.results.cpmChange = appData.results.cpm - cpmOld;
+
+			return [appData.results.cpm, appData.results.cpmChange];
+
+		},
+
+
 		fillListOfTestWords: function (textNumber, words) {
 			var result = words.split(" ");
 
@@ -131,13 +167,39 @@ var dataModule = (function () {
 			//}
 			appData.words.testWords = result;
 		},
-		
-		startTest: function(){
+
+		startTest: function () {
 			appData.indicators.testStarted = true;
+		},
+
+		timeLeft: function () {
+			return appData.indicators.timeLeft != 0;
+		},
+
+		testStarted: function () {
+			return appData.indicators.testStarted;
+		},
+
+		reduceTime: function () {
+			appData.indicators.timeLeft--;
+			return appData.indicators.timeLeft;
 		},
 
 		moveToNewWord: function () {
 			if (appData.words.currentWordIndex > -1) {
+
+				if (appData.words.currentWord.value.isCorrect == true) {
+
+					appData.results.numOfCorrectWords++;
+				}
+
+				appData.results.numOfCorrectCharacters += appData.words.currentWord.characters.totalCorrect;
+
+				appData.results.numOfTestCharacters += appData.words.currentWord.characters.totalTest;
+
+
+
+
 
 			}
 			appData.words.currentWordIndex++;

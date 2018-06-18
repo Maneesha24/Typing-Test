@@ -1,12 +1,31 @@
 var eventsModule = (function (dataModule, UIModule, certificationModule, wordsModule) {
 	var addEventListeners = function () {
-		UIModule.getDOMElements().textInput.addEventListener('input', function (event) {
+
+		UIModule.getDOMElements().textInput.addEventListener('keydown', function (event) {
 			if (dataModule.testEnded()) {
 				return;
 			}
+			var key = event.keyCode;
+			if (key == 13) {
+				UIModule.getDOMElements().textInput.value += dataModule.getLineReturn() + ' ';
+
+				var inputEvent = new Event('input');
+				dataModule.getDOMElements().textInput.dispatchEvent(inputEvent);
+			}
+
+		});
+
+		UIModule.getDOMElements().textInput.addEventListener('input', function (event) {
 
 			if (!dataModule.testStarted()) {
+				var b = setInterval(function () {
 
+					
+					
+					
+					
+					
+				}, 1000);
 			}
 
 			var typedWord = UIModule.getTypedWord();
@@ -16,7 +35,7 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 			var currentWord = dataModule.getCurrentWord();
 			UIModule.formatWord(currentWord);
 
-			if (UIModule.spacePressed(event) || UIModule.enterPressed()) {
+			if (UIModule.spacePressed(event) || UIModule.enterPressed(dataModule.getLineReturn())) {
 				UIModule.emptyInput();
 				UIModule.deactivateCurrentWord();
 				dataModule.moveToNewWord();
@@ -26,7 +45,7 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 				var currentWord = dataModule.getCurrentWord();
 				UIModule.formatWord(currentWord);
-				
+
 				UIModule.scroll();
 
 			}
@@ -36,10 +55,10 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 
 	};
-	
-	window.addEventListener('resize',UIModule.scroll);
-	
-	
+
+	window.addEventListener('resize', UIModule.scroll);
+
+
 	return {
 		init: function (duration, textNumber) {
 			var words = wordsModule.getWords(textNumber);

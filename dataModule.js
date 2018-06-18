@@ -131,6 +131,10 @@ var dataModule = (function () {
 			//}
 			appData.words.testWords = result;
 		},
+		
+		startTest: function(){
+			appData.indicators.testStarted = true;
+		},
 
 		moveToNewWord: function () {
 			if (appData.words.currentWordIndex > -1) {

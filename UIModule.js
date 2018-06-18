@@ -68,12 +68,12 @@ var UIModule = (function () {
 			DOMElements.content.innerHTML = content;
 
 		},
-		
-		scroll: function(){
-			var activeWord  = DOMElements.activeWord;
+
+		scroll: function () {
+			var activeWord = DOMElements.activeWord;
 			var top1 = activeWord.offsetTop;
 			var top2 = DOMElements.content.offsetTop;
-			var diff = top1 = top2;
+			var diff = top1 - top2;
 			DOMElements.content.scrollTop = diff - 40;
 		},
 
@@ -81,8 +81,9 @@ var UIModule = (function () {
 			return event.data == ' '
 		},
 
-		enterPressed: function () {
+		enterPressed: function (lineReturn) {
 
+			return this.getTypedWord().includes(lineReturn + ' ');
 		},
 
 		emptyInput: function () {

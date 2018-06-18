@@ -38,6 +38,14 @@ var UIModule = (function () {
 	var joinEachWord = function (array) {
 		return array.join('');
 	};
+
+	var userValue;
+	var returnCharClass = function (currentCharacter, index) {
+		return (index < userValue.length) ? (currentCharacter == userValue[index] ? 'correctCharacter' : 'wrongCharacter') : '0';
+
+
+	};
+
 	return {
 		inputFocus: function () {
 			DOMElements.textInput.focus();
@@ -77,6 +85,19 @@ var UIModule = (function () {
 			var activeWord = DOMElements.activeWord;
 			activeWord.className = 'activeWord';
 
+			var correctValue = wordObject.value.correct;
+			userValue = wordObject.value.user;
+
+
+			var classes = Array.prototype.map.call(correctValue,
+				returnCharClass);
+			var activeWord = DOMElements.activeWord;
+			var characters = activeWord.children;
+
+			for (var i = 0; i < characters.length; i++) {
+				characters[i].removeAttribute('class');
+				characters[i].className = classes[i];
+			}
 
 		},
 

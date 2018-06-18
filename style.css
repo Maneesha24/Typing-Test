@@ -114,3 +114,11 @@ i {
 	background-color: darkgray;
 	border-radius: 5px;
 }
+
+.correctCharacter{
+	color: blue;
+}
+
+.wrongCharacter {
+	color: red;
+}

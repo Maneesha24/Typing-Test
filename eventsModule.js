@@ -13,7 +13,9 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 			
 			dataModule.updateCurrentWord(typedWord);
 			
-			
+			var currentWord = dataModule.getCurrentWord();
+			UIModule.formatWord(currentWord);
+
 			if (UIModule.spacePressed() || UIModule.enterPressed()) {
 
 			}

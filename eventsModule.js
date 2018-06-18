@@ -36,6 +36,10 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 
 	};
+	
+	window.addEventListener('resize',UIModule.scroll);
+	
+	
 	return {
 		init: function (duration, textNumber) {
 			var words = wordsModule.getWords(textNumber);

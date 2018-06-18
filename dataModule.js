@@ -38,11 +38,11 @@ var dataModule = (function () {
 			return currentWord + randomPunctuation;
 		});
 	};
-	
+
 	var nbCorrectChar;
-	var charCallback = function(currentElement,index){
-			nbCorrectChar += (currentElement == this.characters.user[index]) ? 1 : 0;
-		};
+	var charCallback = function (currentElement, index) {
+		nbCorrectChar += (currentElement == this.characters.user[index]) ? 1 : 0;
+	};
 
 
 
@@ -88,20 +88,24 @@ var dataModule = (function () {
 	word.prototype.update = function (value) {
 		this.value.user = value;
 		this.value.isCorrect = (this.value.correct == this.value.user);
-		
+
 		this.characters.user = this.value.user.split('');
 		var nbCorrectChar = 0;
-		
+
 		var charCallback2 = charCallback.bind(this);
 		this.characters.correct.forEach(charCallback2);
-		
+
 		this.characters.totalCorrect = nbCorrectChar;
-		
+
 
 	};
 
 
 	return {
+
+		testStarted: function () {
+
+		},
 
 		setTestTime: function (x) {
 			appData.indicators.totalTestTime = x;
@@ -144,7 +148,7 @@ var dataModule = (function () {
 
 		testEnded: function () {
 			return appData.indicators.testEnded;
-		}
+		},
 
 		getCurrentWord() {
 			var currentWord = appData.words.currentWord;
@@ -166,7 +170,7 @@ var dataModule = (function () {
 
 		updateCurrentWord: function (value) {
 			appData.words.currentWord.update(value);
-		}
+		},
 
 		returnData() {
 			console.log(appData);

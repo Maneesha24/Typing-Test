@@ -1,6 +1,6 @@
 var eventsModule = (function (dataModule, UIModule, certificationModule, wordsModule) {
 	var addEventListeners = function () {
-		UIModule.getDOMElements().textInput.addEventListener('keydown', function (event) {
+		UIModule.getDOMElements().textInput.addEventListener('input', function (event) {
 			if(dataModule.testEnded()){
 				return ;
 			}

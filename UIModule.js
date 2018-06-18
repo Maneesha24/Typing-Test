@@ -37,16 +37,16 @@ var UIModule = (function () {
 
 	var joinEachWord = function (array) {
 		return array.join('');
-	}
+	};
 	return {
 		inputFocus: function () {
 			DOMElements.textInput.focus();
 		},
-getDOMElements : function(){
-	return{
-		textInput : DOMElements.textInput;
-	};
-}
+		getDOMElements: function () {
+			return {
+				textInput: DOMElements.textInput
+			};
+		},
 
 		fillContent: function (array, lineReturn) {
 
@@ -60,18 +60,18 @@ getDOMElements : function(){
 			DOMElements.content.innerHTML = content;
 
 		},
-		
-		spacePressed:  function(){
-			
-		}
-	
-	enterPressed :  function(){
-		
-	}
-	
-	getTypedWord : function(){
-		return DOMElements.textInput.value;
-	}
+
+		spacePressed: function () {
+
+		},
+
+		enterPressed: function () {
+
+		},
+
+		getTypedWord: function () {
+			return DOMElements.textInput.value;
+		},
 
 		formatWord: function (wordObject) {
 			var activeWord = DOMElements.activeWord;

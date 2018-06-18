@@ -42,7 +42,11 @@ var UIModule = (function () {
 		inputFocus: function () {
 			DOMElements.textInput.focus();
 		},
-
+getDOMElements : function(){
+	return{
+		textInput : DOMElements.textInput;
+	};
+}
 
 		fillContent: function (array, lineReturn) {
 
@@ -56,6 +60,18 @@ var UIModule = (function () {
 			DOMElements.content.innerHTML = content;
 
 		},
+		
+		spacePressed:  function(){
+			
+		}
+	
+	enterPressed :  function(){
+		
+	}
+	
+	getTypedWord : function(){
+		return DOMElements.textInput.value;
+	}
 
 		formatWord: function (wordObject) {
 			var activeWord = DOMElements.activeWord;

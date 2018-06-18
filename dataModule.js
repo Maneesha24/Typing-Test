@@ -68,19 +68,22 @@ var dataModule = (function () {
 
 	var word = function (index) {
 		this.value = {
-		correct : appData.words.testWords[index] + ' ',
+			correct: appData.words.testWords[index] + ' ',
 			user: '',
-			isCorrect : false
+			isCorrect: false
 		};
 		this.characters = {
-		correct : this.value.correct.split(''),
+			correct: this.value.correct.split(''),
 			user: [],
-			totalCorrect : 0,
+			totalCorrect: 0,
 			totalTest: this.value.correct.length
 		};
-		
+
 	};
-	word.prototype.update = function (value) {};
+	word.prototype.update = function (value) {
+
+
+	};
 
 
 	return {
@@ -109,26 +112,30 @@ var dataModule = (function () {
 			//}
 			appData.words.testWords = result;
 		},
-		
-		moveToNewWord : function(){
-			if(appData.words.currentWordIndex> -1){
-			   
-			   }
+
+		moveToNewWord: function () {
+			if (appData.words.currentWordIndex > -1) {
+
+			}
 			appData.words.currentWordIndex++;
 			var currentIndex = appData.words.currentWordIndex;
 			var newWord = new word(currentIndex);
 			appData.words.currentWord = newWord;
 		},
-		
-		getCurrentWordIndex(){
+
+		getCurrentWordIndex() {
 			return appData.words.currentWordIndex;
 		},
-		
-		getCurrentWord(){
+
+		testEnded: function () {
+			return appData.indicators.testEnded;
+		}
+
+		getCurrentWord() {
 			var currentWord = appData.words.currentWord;
 			return {
-				value : {
-					correct : currentWord.value.correct,
+				value: {
+					correct: currentWord.value.correct,
 					user: currentWord.value.user
 				}
 			};
@@ -141,6 +148,10 @@ var dataModule = (function () {
 		getLineReturn() {
 			return lineReturn;
 		},
+
+		updateCurrentWord: function (value) {
+			appData.words.currentWord.update(value);
+		}
 
 		returnData() {
 			console.log(appData);

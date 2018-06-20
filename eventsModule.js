@@ -42,6 +42,15 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 						var timeLeft = dataModule.reduceTime();
 
 						UIModule.updateTimeLeft(timeLeft);
+					} else {
+						clearInterval(b);
+						dataModule.endTest();
+
+						dataModule.returnData();
+						UIModule.fillModal(results.wpm);
+						UIModule.showModal();
+
+
 					}
 
 
@@ -68,6 +77,15 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 				UIModule.scroll();
 
+			}
+		});
+
+		UIModule.getDOMElements().download.addEventListener('click', function (event) {
+			if (UIModule.isNameEmpty()) {
+				UIModule.flagNameInput();
+			} else {
+				var certificateData = dataModule.getCertificateData();
+				certificationModule.generateCertificate(certificateData);
 			}
 		});
 

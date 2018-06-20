@@ -122,3 +122,7 @@ i {
 .wrongCharacter {
 	color: red;
 }
+
+.result{
+	font-size: 20px;
+}

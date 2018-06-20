@@ -11,8 +11,10 @@ var UIModule = (function () {
 		textInput: document.querySelector('#input'),
 		nameInput: document.querySelector('.form-group'),
 		content: document.getElementById('content'),
+		nameField: document.getElementById('name'),
 		activeWord: '',
-		modal: $('#myModal')
+		modal: $('#myModal'),
+		download: document.getElementById('download')
 	};
 
 	var splitArray = function (string) {
@@ -81,7 +83,8 @@ var UIModule = (function () {
 		
 		getDOMElements: function () {
 			return {
-				textInput: DOMElements.textInput
+				textInput: DOMElements.textInput,
+				download: DOMElements.download
 			};
 		},
 		
@@ -103,8 +106,56 @@ var UIModule = (function () {
 		updateChange(results.accuracyChange, DOMElements.accuracyChange);
 	},
 		
+		fillModal : function(wpm){
+			var results;
+			if(wpm<40){
+				results = {
+					type : 'turtle' ,
+					image: 'turtle.jpg',
+					level: 'Average'
+				};
+			}else if(wpm < 70){
+				results = {
+					type : 'horse' ,
+					image: 'horse.jpg',
+					level: 'Beginner'
+				};
+			}else{
+				results = {
+					type : 'cheetah' ,
+					image: 'cheetah.jpg',
+					level: 'Expert'
+				};
+			}
+			
+			var html = '<div class = "result"><p>You are a %type%!</p><p>You type at a speed of %wpm% words per minute!</p><img width ="300" height = "200" class = "rounded-circle" src="images/%image%" alt = %alt%></div>';
+			
+			html = html.replace('%type%',results.type);
+			html = html.replace('%wpm%',wpm);
+			html = html.replace('%image%',results.image);
+			html = html.replace('%alt%',results.type);
+			
+			DOMElements.nameInput.insertAdjacentHTML('beforebegin',html);
+			
+			DOMElements.download.setAttribute('level',results.level);
+			
+		},
+		
+		
+		showModal : function(){
+			DOMElements.modal.modal('show');
+		},
+		
 		inputFocus: function () {
 			DOMElements.textInput.focus();
+		},
+		
+		isNameEmpty : function(){
+			return DOMElements.nameField.value == ""
+		},
+		
+		flagNameInput: function(){
+			DOMElements.nameField.style.borderColor = 'red';
 		},
 		
 		spacePressed: function (event) {
@@ -136,9 +187,6 @@ var UIModule = (function () {
 			DOMElements.content.innerHTML = content;
 
 		},
-
-	
-
 		
 		formatWord: function (wordObject) {
 			var activeWord = DOMElements.activeWord;
@@ -165,6 +213,7 @@ var UIModule = (function () {
 			DOMElements.activeWord = DOMElements.content.children[index];
 
 		},
+		
 		deactivateCurrentWord: function () {
 			DOMElements.activeWord.removeAttribute('class');
 		},

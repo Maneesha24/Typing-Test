@@ -114,6 +114,10 @@ var dataModule = (function () {
 		startTest: function () {
 			appData.indicators.testStarted = true;
 		},
+		
+		endTest :  function(){
+			appData.indicators.testEnded = true;
+		},
 
 		getTimeLeft: function () {
 			return appData.indicators.timeLeft;
@@ -247,6 +251,13 @@ var dataModule = (function () {
 
 		getLineReturn() {
 			return lineReturn;
+		},
+		 
+		getCertificateData (){
+			return{
+				wpm: appData.indicators.wpm,
+				accuracy : appData.indicators.accuracy
+			}
 		},
 
 		returnData() {

@@ -1,18 +1,18 @@
 var dataModule = (function () {
 
 	var lineReturn = '|';
-	var shuffle = function (array) {
-		var newArray = [];
-		var randomIndex;
-		var randomElement;
-		while (array.length > 0) {
-			randomIndex = Math.floor(Math.random() * array.length);
-			randomElement = array[randomIndex];
-			newArray.push(randomElement);
-			array.splice(randomIndex, 1);
-		}
-		return newArray;
-	};
+	//var shuffle = function (array) {
+		//var newArray = [];
+		//var randomIndex;
+		//var randomElement;
+		//while (array.length > 0) {
+			//randomIndex = Math.floor(Math.random() * array.length);
+			//randomElement = array[randomIndex];
+			//newArray.push(randomElement);
+			//array.splice(randomIndex, 1);
+		//}
+		//return newArray;
+	//};
 
 	String.prototype.capitalize = function () {
 		var newString = '';
@@ -22,23 +22,23 @@ var dataModule = (function () {
 		return newString;
 	};
 
-	var capitalizeRandom = function (arrayOfStrings) {
-		return arrayOfStrings.map(function (currentWord) {
+	//var capitalizeRandom = function (arrayOfStrings) {
+		//return arrayOfStrings.map(function (currentWord) {
 
-			var x = Math.floor(4 * Math.random());
-			return (x == 3) ? currentWord.capitalize() : currentWord;
-		})
-	};
+			//var x = Math.floor(4 * Math.random());
+			//return (x == 3) ? currentWord.capitalize() : //currentWord;
+		//})
+	//};
 
-	var addRandomPunctuation = function (arrayOfStrings) {
-		return arrayOfStrings.map(function (currentWord) {
-			var randomPunctuation;
-			var items = [lineReturn, '?', '', '', '', '', '.', '', ',', '', '', '', '', '', '', '!', '', '', '', '', ''];
-			var randomIndex = Math.floor(Math.random() * items.length);
-			randomPunctuation = items[randomIndex];
-			return currentWord + randomPunctuation;
-		});
-	};
+	//var addRandomPunctuation = function (arrayOfStrings) {
+		//return arrayOfStrings.map(function (currentWord) {
+			//var randomPunctuation;
+			//var items = [lineReturn, '?', '', '', '', '', '.', '', ',', '', '', '', '', '', '', '!', '', '', '', '',''];
+			//var randomIndex = Math.floor(Math.random() * items.length);
+			//randomPunctuation = items[randomIndex];
+			//return currentWord + randomPunctuation;
+		//});
+	//};
 
 	var nbCorrectChar;
 	var charCallback = function (currentElement, index) {
@@ -198,12 +198,12 @@ var dataModule = (function () {
 		fillListOfTestWords: function (textNumber, words) {
 			var result = words.split(" ");
 
-			if (textNumber == 0) {
-				result = shuffle(result);
-				result = capitalizeRandom(result);
-				result = addRandomPunctuation(result);
+			//if (textNumber == 0) {
+				//result = shuffle(result);
+				//result = capitalizeRandom(result);
+				//result = addRandomPunctuation(result);
 
-			}
+			//}
 			appData.words.testWords = result;
 		},
 

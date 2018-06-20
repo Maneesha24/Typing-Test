@@ -82,8 +82,8 @@ i {
 .btn-primary:focus,
 .btn-primary:hover,
 .btn-primary:active {
-	background-color: rgba(0, 255, 213,0.9);
-color: white;
+	background-color: rgba(0, 255, 213, 0.9);
+	color: white;
 	cursor: pointer;
 
 
@@ -112,12 +112,12 @@ color: white;
 }
 
 
-.activeWord{
+.activeWord {
 	background-color: darkgray;
 	border-radius: 5px;
 }
 
-.correctCharacter{
+.correctCharacter {
 	color: blue;
 }
 
@@ -125,15 +125,19 @@ color: white;
 	color: red;
 }
 
-.result{
+.result {
 	font-size: 20px;
 }
 
-.form-group>input{
+.form-group > input {
 	margin-top: 1rem;
 }
 
-button{
-		cursor: pointer;
+button {
+	cursor: pointer;
 }
 
+.modal-header>{
+	display: flex;
+	align-items: center;
+}

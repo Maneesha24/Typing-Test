@@ -18,24 +18,34 @@ var certificationModule = (function () {
 			doc.setFontType("italic");
 			doc.text(108, 83, 'This Certificate is Hereby Awarded to :', 'center');
 
+			var button = event.target;
+			var nameField = button.parentElement.previousElementSibling.children[1].children[1];
+			var name = nameField.value;
 			doc.setTextColor(49, 216, 189);
 			doc.setFontSize(19);
 			doc.setFontType("bold");
-			doc.text(108, 92, 'Name', 'center');
-			
+			doc.text(108, 92, name, 'center');
+
 			doc.setFontSize(14);
 			doc.setTextColor(0, 0, 0);
 			doc.setFontType("italic");
-			doc.text(108,103,'For achieving results noted below as documented','center');
-			doc.text(108,110,'and verified.','center');
-			
-			doc.setFontType("oblique");
-			doc.text(110,123,'Level: Expert','center');
-			doc.text(110,133,'Average Speed: 84 wpm','center');
-			doc.text(110,143,'Accuracy:100%','center');
-			
-			doc.text(133,173,'Awarded on 10/31/2017')
-			
+			doc.text(108, 103, 'For achieving results noted below as documented', 'center');
+			doc.text(108, 110, 'and verified.', 'center');
+
+			var level = event.target.getAttribute('level');
+			doc.setFontType("normal");
+			doc.text(110, 123, 'Level: ' + level, 'center');
+			doc.text(110, 133, 'Average Speed: ' + data.wpm + ' wpm', 'center');
+			doc.text(110, 143, 'Accuracy: ' + data.accuracy + '%', 'center');
+
+			var date = new Date();
+			date = date.toLocaleDateString('en-US');
+			doc.setFontType("italic");
+			doc.text(133, 165, 'Awarded on :' + date);
+			doc.setTextColor(49, 216, 189);
+			doc.setFontSize(19);
+			doc.setFontType("bold");
+			doc.text(155, 173, 'xxxxx')
 
 			doc.save('certificate.pdf');
 

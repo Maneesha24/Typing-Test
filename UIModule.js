@@ -112,18 +112,18 @@ var UIModule = (function () {
 				results = {
 					type : 'turtle' ,
 					image: 'turtle.jpg',
-					level: 'Average'
+					level: 'Beginner'
 				};
 			}else if(wpm < 70){
 				results = {
 					type : 'horse' ,
 					image: 'horse.jpg',
-					level: 'Beginner'
+					level: 'Average'
 				};
 			}else{
 				results = {
 					type : 'cheetah' ,
-					image: 'cheetah.jpg',
+					image: 'puma.jpg',
 					level: 'Expert'
 				};
 			}

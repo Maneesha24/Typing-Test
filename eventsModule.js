@@ -2,6 +2,8 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 	var addEventListeners = function () {
 
 		UIModule.getDOMElements().textInput.addEventListener('keydown', function (event) {
+			console.log(event);
+
 			if (dataModule.testEnded()) {
 				return;
 			}
@@ -10,14 +12,19 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 				UIModule.getDOMElements().textInput.value += dataModule.getLineReturn() + ' ';
 
 				var inputEvent = new Event('input');
-				dataModule.getDOMElements().textInput.dispatchEvent(inputEvent);
+				UIModule.getDOMElements().textInput.dispatchEvent(inputEvent);
 			}
 
 		});
 
 		UIModule.getDOMElements().textInput.addEventListener('input', function (event) {
+			if (dataModule.testEnded()) {
+				return;
+			}
 
 			if (!dataModule.testStarted()) {
+				dataModule.startTest();
+
 				var b = setInterval(function () {
 
 					var results = {};
@@ -25,7 +32,11 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 					[results.cpm, results.cpmChange] = dataModule.calculateCpm();
 
-					
+					[results.accuracy, results.accuracyChange] = dataModule.calculateAccuracy();
+
+					UIModule.updateResults(results);
+
+
 					if (dataModule.timeLeft()) {
 
 						var timeLeft = dataModule.reduceTime();
@@ -59,9 +70,6 @@ var eventsModule = (function (dataModule, UIModule, certificationModule, wordsMo
 
 			}
 		});
-
-
-
 
 	};
 

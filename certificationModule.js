@@ -1,3 +1,6 @@
-var certificationModule = (function () {
-
-})()
+var certificationModule = (function(){
+    
+    return {
+        generateCertificate: function(){}
+    };
+})();

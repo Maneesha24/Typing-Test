@@ -18,6 +18,7 @@ var UIModule = (function () {
 	var splitArray = function (string) {
 		return string.split('');
 	};
+
 	var addSpace = function (array) {
 		array.push(' ');
 		return array;
@@ -46,14 +47,81 @@ var UIModule = (function () {
 
 	};
 
+
+	var updateChange = function (value, changeElement) {
+
+
+		var classToAdd, html;
+        [classToAdd, html] = (value >= 0) ? ['scoreUp', '+' + value] : ['scoreDown', value];
+
+
+		if (changeElement == DOMElements.accuracyChange) {
+			html += '%';
+		}
+
+
+		changeElement.innerHTML = html;
+
+
+		changeElement.removeAttribute('class');
+		changeElement.className = classToAdd;
+
+
+		fadeElement(changeElement);
+	};
+
+	var fadeElement = function (element) {
+		element.style.opacity = 1;
+		setTimeout(function () {
+			element.style.opacity = 0.9;
+		}, 100);
+	};
+
 	return {
-		inputFocus: function () {
-			DOMElements.textInput.focus();
-		},
+		
 		getDOMElements: function () {
 			return {
 				textInput: DOMElements.textInput
 			};
+		},
+		
+		updateTimeLeft: function (x) {
+			DOMElements.timeLeft.innerHTML = x;
+		},
+		
+		
+		updateResults: function (results) {
+		
+		DOMElements.wpm.innerHTML = results.wpm;
+		
+		DOMElements.cpm.innerHTML = results.cpm;
+		
+		DOMElements.accuracy.innerHTML = results.accuracy + '%';
+		
+		updateChange(results.wpmChange, DOMElements.wpmChange);
+		updateChange(results.cpmChange, DOMElements.cpmChange);
+		updateChange(results.accuracyChange, DOMElements.accuracyChange);
+	},
+		
+		inputFocus: function () {
+			DOMElements.textInput.focus();
+		},
+		
+		spacePressed: function (event) {
+			return event.data == ' '
+		},
+
+		enterPressed: function (lineReturn) {
+		return DOMElements.textInput.value.includes(lineReturn + ' ');
+	},
+
+		emptyInput: function () {
+			DOMElements.textInput.value = '';
+		},
+		
+		getTypedWord: function () {
+			console.log(DOMElements.textInput.value);
+			return DOMElements.textInput.value;
 		},
 
 		fillContent: function (array, lineReturn) {
@@ -69,31 +137,9 @@ var UIModule = (function () {
 
 		},
 
-		scroll: function () {
-			var activeWord = DOMElements.activeWord;
-			var top1 = activeWord.offsetTop;
-			var top2 = DOMElements.content.offsetTop;
-			var diff = top1 - top2;
-			DOMElements.content.scrollTop = diff - 40;
-		},
+	
 
-		spacePressed: function (event) {
-			return event.data == ' '
-		},
-
-		enterPressed: function (lineReturn) {
-
-			return this.getTypedWord().includes(lineReturn + ' ');
-		},
-
-		emptyInput: function () {
-			DOMElements.textInput.value = '';
-		},
-
-		getTypedWord: function () {
-			return DOMElements.textInput.value;
-		},
-
+		
 		formatWord: function (wordObject) {
 			var activeWord = DOMElements.activeWord;
 			activeWord.className = 'activeWord';
@@ -113,11 +159,7 @@ var UIModule = (function () {
 			}
 
 		},
-
-		updateTimeLeft: function (x) {
-			DOMElements.timeLeft.innerHTML = x;
-		},
-
+		
 		setActiveWord: function (index) {
 
 			DOMElements.activeWord = DOMElements.content.children[index];
@@ -125,6 +167,15 @@ var UIModule = (function () {
 		},
 		deactivateCurrentWord: function () {
 			DOMElements.activeWord.removeAttribute('class');
+		},
+		
+		scroll: function () {
+			var activeWord = DOMElements.activeWord;
+			var top1 = activeWord.offsetTop;
+			var top2 = DOMElements.content.offsetTop;
+			var diff = top1 - top2;
+			DOMElements.content.scrollTop = diff - 40;
 		}
+
 	}
 })()

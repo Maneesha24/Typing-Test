@@ -29,6 +29,7 @@ var dataModule = (function () {
 			return (x == 3) ? currentWord.capitalize() : currentWord;
 		})
 	};
+
 	var addRandomPunctuation = function (arrayOfStrings) {
 		return arrayOfStrings.map(function (currentWord) {
 			var randomPunctuation;
@@ -43,7 +44,6 @@ var dataModule = (function () {
 	var charCallback = function (currentElement, index) {
 		nbCorrectChar += (currentElement == this.characters.user[index]) ? 1 : 0;
 	};
-
 
 
 	var appData = {
@@ -85,40 +85,55 @@ var dataModule = (function () {
 		};
 
 	};
+
 	word.prototype.update = function (value) {
 		this.value.user = value;
 		this.value.isCorrect = (this.value.correct == this.value.user);
 
 		this.characters.user = this.value.user.split('');
-		var nbCorrectChar = 0;
+		nbCorrectChar = 0;
 
 		var charCallback2 = charCallback.bind(this);
 		this.characters.correct.forEach(charCallback2);
 
 		this.characters.totalCorrect = nbCorrectChar;
 
-
 	};
 
 
 	return {
-
-		testStarted: function () {
-
-		},
-
 		setTestTime: function (x) {
 			appData.indicators.totalTestTime = x;
 		},
-
 
 		initializeTimeLeft: function (x) {
 
 			appData.indicators.timeLeft = appData.indicators.totalTestTime;
 		},
 
+		startTest: function () {
+			appData.indicators.testStarted = true;
+		},
+
 		getTimeLeft: function () {
 			return appData.indicators.timeLeft;
+		},
+
+		reduceTime: function () {
+			appData.indicators.timeLeft--;
+			return appData.indicators.timeLeft;
+		},
+
+		timeLeft: function () {
+			return appData.indicators.timeLeft != 0;
+		},
+
+		testEnded: function () {
+			return appData.indicators.testEnded;
+		},
+
+		testStarted: function () {
+			return appData.indicators.testStarted;
 		},
 
 		calculateWpm: function () {
@@ -155,34 +170,41 @@ var dataModule = (function () {
 
 		},
 
+		calculateAccuracy: function () {
+			var accuracyOld = appData.results.accuracy;
+			var numOfCorrectCharacters = appData.results.numOfCorrectCharacters;
+			var numOfTestCharacters = appData.results.numOfTestCharacters;
+
+			if (appData.indicators.timeLeft != appData.indicators.totalTestTime) {
+				if (numOfTestCharacters != 0) {
+					appData.results.accuracy = Math.round(100 * numOfCorrectCharacters / numOfTestCharacters);
+				} else {
+					appData.results.accuracy = 0
+				}
+			} else {
+				appData.results.accuracy = 0;
+			}
+			appData.results.accuracyChange = appData.results.accuracy - accuracyOld;
+
+			return [appData.results.accuracy, appData.results.accuracyChange];
+
+		},
+
 
 		fillListOfTestWords: function (textNumber, words) {
 			var result = words.split(" ");
 
-			//if (textNumber == 0) {
-			//result = shuffle(result);
-			//result = capitalizeRandom(result);
-			//result = addRandomPunctuation(result);
+			if (textNumber == 0) {
+				result = shuffle(result);
+				result = capitalizeRandom(result);
+				result = addRandomPunctuation(result);
 
-			//}
+			}
 			appData.words.testWords = result;
 		},
 
-		startTest: function () {
-			appData.indicators.testStarted = true;
-		},
-
-		timeLeft: function () {
-			return appData.indicators.timeLeft != 0;
-		},
-
-		testStarted: function () {
-			return appData.indicators.testStarted;
-		},
-
-		reduceTime: function () {
-			appData.indicators.timeLeft--;
-			return appData.indicators.timeLeft;
+		getListOfTestWords: function () {
+			return appData.words.testWords;
 		},
 
 		moveToNewWord: function () {
@@ -197,11 +219,8 @@ var dataModule = (function () {
 
 				appData.results.numOfTestCharacters += appData.words.currentWord.characters.totalTest;
 
-
-
-
-
 			}
+
 			appData.words.currentWordIndex++;
 			var currentIndex = appData.words.currentWordIndex;
 			var newWord = new word(currentIndex);
@@ -210,10 +229,6 @@ var dataModule = (function () {
 
 		getCurrentWordIndex() {
 			return appData.words.currentWordIndex;
-		},
-
-		testEnded: function () {
-			return appData.indicators.testEnded;
 		},
 
 		getCurrentWord() {
@@ -226,16 +241,12 @@ var dataModule = (function () {
 			};
 		},
 
-		getListOfTestWords: function () {
-			return appData.words.testWords;
+		updateCurrentWord: function (value) {
+			appData.words.currentWord.update(value);
 		},
 
 		getLineReturn() {
 			return lineReturn;
-		},
-
-		updateCurrentWord: function (value) {
-			appData.words.currentWord.update(value);
 		},
 
 		returnData() {
